@@ -449,8 +449,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388498318}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30974883, y: -0.53067094, z: 0.21667774, w: 0.7586137}
-  m_LocalPosition: {x: 5.248133, y: 4.331886, z: -9.039432}
+  m_LocalRotation: {x: 0.447634, y: -0.4801137, z: 0.3131322, w: 0.6863402}
+  m_LocalPosition: {x: 4.3087535, y: 5.9318857, z: -8.696553}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1077,11 +1077,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  airSpeed: 14
+  isHeavy: 1
   groundDrag: 6
-  playerHeight: 2
+  jumpForce: 100
+  jumpCooldown: 0.5
+  airMultiplier: 1
+  readyToJump: 1
+  jumpKey: 32
+  playerHeight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
+  grounded: 0
   stamina: 0
   orientation: {fileID: 1739140699}
 --- !u!54 &1229147211
@@ -1092,7 +1100,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1229147208}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1367,8 +1375,8 @@ MonoBehaviour:
   Radius: 10
   Orbits:
     Top:
-      Radius: 3
-      Height: 3.5
+      Radius: 2
+      Height: 5.1
     Center:
       Radius: 3
       Height: 2.5
@@ -1458,8 +1466,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1569516447}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30974883, y: -0.53067094, z: 0.21667776, w: 0.7586137}
-  m_LocalPosition: {x: 5.248133, y: 4.331886, z: -9.039432}
+  m_LocalRotation: {x: 0.44763407, y: -0.48011363, z: 0.31313217, w: 0.6863403}
+  m_LocalPosition: {x: 4.3087535, y: 5.9318857, z: -8.696553}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
