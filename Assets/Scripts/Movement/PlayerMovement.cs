@@ -1,5 +1,7 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,7 +13,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float groundDrag;
 
+    public float jumpTimer;
     public float jumpForce;
+    public float maxJumpForce;
+    public float minJumpForce;
     public float flyForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -26,7 +31,8 @@ public class PlayerMovement : MonoBehaviour
     public bool grounded;
 
     [Header("Stats")]
-    public float stamina;
+    public float maxStamina;
+    public float currentStamina;
     bool hasWater;
 
     public Transform orientation;
@@ -37,13 +43,16 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
-    public GameObject player;
+    [SerializeField] public Image staminaBar;
+    [SerializeField] public Image jumpBar;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     { 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        currentStamina = maxStamina;
+        
     }
 
     // Update is called once per frame
@@ -63,13 +72,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isHeavy)
         {
-            rb.useGravity = false;
+            rb.mass = 1;
         }
 
         else
         {
-            rb.useGravity = true;
+            rb.mass = 5;
         }
+
+        if(grounded && currentStamina < maxStamina)
+        {
+            currentStamina += Time.deltaTime * 20;
+        }
+        
+
+        staminaBar.fillAmount = currentStamina / 100;
     }
 
     private void FixedUpdate()
@@ -83,7 +100,13 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //jump when heavy
-        if(Input.GetKeyDown(jumpKey) && readyToJump && grounded && isHeavy)
+        if (Input.GetKey(jumpKey) && readyToJump && grounded && isHeavy && currentStamina > 30)
+        {
+            jumpTimer += Time.deltaTime;
+            jumpBar.fillAmount = jumpTimer * 2;
+        }
+            
+        if(Input.GetKeyUp(jumpKey) && readyToJump && grounded && isHeavy && currentStamina > 30)
         {
             readyToJump = false;
 
@@ -92,9 +115,15 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if (Input.GetKey(jumpKey) && !isHeavy)
+        if(Input.GetKey(jumpKey) && !grounded && isHeavy && rb.linearVelocity.y < 0 && currentStamina > 0)
         {
-            rb.AddForce(transform.up * flyForce, ForceMode.Force);
+            rb.AddForce(transform.up * flyForce * 2, ForceMode.Force);
+            currentStamina -= Time.deltaTime * 15;
+        }
+
+        if (Input.GetKey(jumpKey) && !isHeavy && currentStamina >= 0)
+        {
+            rb.AddForce(transform.up * flyForce, ForceMode.Force);       
         }
 
         if (Input.GetKey(KeyCode.LeftShift) && !isHeavy && !grounded)
@@ -145,15 +174,35 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
+        //Calculate the force for jumping
+        float force = jumpForce * jumpTimer;
+        if (force > maxJumpForce) force = maxJumpForce;
+        if (force < minJumpForce) force = minJumpForce;
+
         //reset y velocity
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(transform.up * force, ForceMode.Impulse);
+        currentStamina -= force / 3;
+        jumpTimer = 0f;
+        jumpBar.fillAmount = 0f;
     }
 
     private void ResetJump()
     { 
         readyToJump = true;
+    }
+
+    private void ChangeGravity()
+    {
+        if (rb.useGravity)
+        {
+            rb.useGravity = false;
+        }
+        else
+        {
+            rb.useGravity = true;
+        }
     }
 
 }
