@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 173830215}
   - component: {fileID: 173830214}
   - component: {fileID: 173830213}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   - component: {fileID: 455499154}
   - component: {fileID: 455499153}
   - component: {fileID: 455499152}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,7 +608,7 @@ GameObject:
   - component: {fileID: 635140008}
   - component: {fileID: 635140007}
   - component: {fileID: 635140006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 789309273}
   - component: {fileID: 789309272}
   - component: {fileID: 789309271}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -824,7 +824,7 @@ GameObject:
   - component: {fileID: 1001436066}
   - component: {fileID: 1001436065}
   - component: {fileID: 1001436064}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,6 +1081,7 @@ MonoBehaviour:
   isHeavy: 1
   groundDrag: 6
   jumpForce: 100
+  flyForce: 1
   jumpCooldown: 0.5
   airMultiplier: 1
   readyToJump: 1
@@ -1092,6 +1093,7 @@ MonoBehaviour:
   grounded: 0
   stamina: 0
   orientation: {fileID: 1739140699}
+  player: {fileID: 1229147208}
 --- !u!54 &1229147211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1502,7 +1504,7 @@ GameObject:
   - component: {fileID: 1629742098}
   - component: {fileID: 1629742097}
   - component: {fileID: 1629742096}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1641,7 +1643,7 @@ GameObject:
   - component: {fileID: 2031223170}
   - component: {fileID: 2031223169}
   - component: {fileID: 2031223168}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundDrag;
 
     public float jumpForce;
+    public float flyForce;
     public float jumpCooldown;
     public float airMultiplier;
     public bool readyToJump = true;
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    public GameObject player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, whatIsGround);
 
         MyInput();
 
@@ -92,12 +94,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(jumpKey) && !isHeavy)
         {
-            
+            rb.AddForce(transform.up * flyForce, ForceMode.Force);
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && !isHeavy)
+        if (Input.GetKey(KeyCode.LeftShift) && !isHeavy && !grounded)
         {
-            
+            rb.AddForce(-transform.up * flyForce, ForceMode.Force);
         }
 
     }
@@ -117,9 +119,10 @@ public class PlayerMovement : MonoBehaviour
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        Vector3 verticalVel = new Vector3(0f, rb.linearVelocity.y, 0f);
 
         //Limit velocity
-        if(flatVel.magnitude > moveSpeed && grounded)
+        if (flatVel.magnitude > moveSpeed && grounded)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
@@ -130,6 +133,13 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 limitedVel = flatVel.normalized * airSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+        }
+
+        //Limit vertical velocity when flying
+        if (verticalVel.magnitude > airSpeed && !grounded && !isHeavy)
+        {
+            Vector3 limitedVel = verticalVel.normalized * airSpeed;
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, limitedVel.y, rb.linearVelocity.z);
         }
     }
 
