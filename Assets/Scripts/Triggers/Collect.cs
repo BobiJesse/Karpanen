@@ -22,7 +22,12 @@ public class Collect : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Debug.Log("Tavara kerätty");
-            ItemManager.hasRope = true;
+            if (ItemManager.hasItem == false)
+            {
+                ItemManager.hasItem = true;
+                ItemManager.hasRope = true;
+            }
+            
         }
     }
 }
