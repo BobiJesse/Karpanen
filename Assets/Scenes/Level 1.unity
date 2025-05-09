@@ -1394,7 +1394,7 @@ GameObject:
   - component: {fileID: 500081970}
   - component: {fileID: 500081969}
   m_Layer: 0
-  m_Name: lattia (4)
+  m_Name: katto (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5090,7 +5090,7 @@ GameObject:
   - component: {fileID: 1919476715}
   - component: {fileID: 1919476714}
   m_Layer: 0
-  m_Name: lattia (5)
+  m_Name: katto (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5364,7 +5364,7 @@ GameObject:
   - component: {fileID: 2032223754}
   - component: {fileID: 2032223753}
   m_Layer: 0
-  m_Name: lattia (3)
+  m_Name: katto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5687,10 +5687,10 @@ SceneRoots:
   - {fileID: 1284496495}
   - {fileID: 1498926503}
   - {fileID: 1425786610}
-  - {fileID: 2032223756}
   - {fileID: 244197266}
-  - {fileID: 500081972}
   - {fileID: 1456591349}
+  - {fileID: 2032223756}
+  - {fileID: 500081972}
   - {fileID: 1919476717}
   - {fileID: 68131126}
   - {fileID: 1886917482}
