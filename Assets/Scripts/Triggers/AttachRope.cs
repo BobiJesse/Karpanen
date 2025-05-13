@@ -11,6 +11,8 @@ public class AttachRope : MonoBehaviour
     public GameObject originalRope;
     public int requiredRopeID;
 
+    public CollectRope CollectRope;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,6 +37,7 @@ public class AttachRope : MonoBehaviour
                 completedRopeBridge.SetActive(true);
                 originalRope.SetActive(false);
                 ItemManager.ropeImage.SetActive(false);
+                CollectRope.lineRenderer.enabled = false;
                 Debug.Log("Köysi laitettu paikalleen");
             }
 

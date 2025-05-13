@@ -45,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public ItemManager ItemManager;
     public GameObject backPack;
+    public CollectRope CollectRope;
+
+
     [SerializeField] public Image staminaBar;
     [SerializeField] public Image jumpBar;
 
@@ -220,6 +223,7 @@ public class PlayerMovement : MonoBehaviour
         isHeavy = false;
         foreach (Transform child in backPack.transform)
             child.gameObject.SetActive(false);
+        CollectRope.lineRenderer.enabled = false;
     }
 
 }
