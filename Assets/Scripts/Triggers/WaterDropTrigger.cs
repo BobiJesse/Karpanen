@@ -4,6 +4,8 @@ public class WaterDropTrigger : MonoBehaviour
 {
 
     public PlayerMovement PlayerMovement;
+    public ItemManager ItemManager;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +26,9 @@ public class WaterDropTrigger : MonoBehaviour
         {
             Debug.Log("water given to plant");
             PlayerMovement.isHeavy = false;
+            ItemManager.hasItem = false;
+            ItemManager.hasWater = false;
+            ItemManager.waterImage.SetActive(false);
         }
     }
 }

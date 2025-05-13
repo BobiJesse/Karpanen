@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -7,6 +9,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject verifyMenu;
     public bool gamePaused;
+    public GameObject errorMessage;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,5 +49,18 @@ public class PauseMenu : MonoBehaviour
     public void GoToMainMenu()
     {
         SceneManager.LoadScene(sceneName: "Main Menu");
+    }
+
+    public void DeleteErrorMessage()
+    {
+        errorMessage.SetActive(false);
+    }
+
+    public void ShowErrorMessage(string errorText)
+    {
+        Debug.Log(errorText);
+        errorMessage.GetComponent<TextMeshProUGUI>().text = errorText;
+        errorMessage.SetActive(true);
+        Invoke(nameof(DeleteErrorMessage), 1.5f);
     }
 }

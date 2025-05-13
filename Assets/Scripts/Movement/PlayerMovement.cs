@@ -43,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    public ItemManager ItemManager;
+    public GameObject backPack;
     [SerializeField] public Image staminaBar;
     [SerializeField] public Image jumpBar;
 
@@ -131,6 +133,11 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(-transform.up * flyForce, ForceMode.Force);
         }
 
+        if (Input.GetKeyDown(KeyCode.Q) && ItemManager.hasItem == true)
+        {
+            DropItem();
+        }
+
     }
 
     private void MovePlayer()
@@ -203,6 +210,16 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.useGravity = true;
         }
+    }
+
+    private void DropItem()
+    {
+        ItemManager.hasItem = false;
+        ItemManager.hasRope = false;
+        ItemManager.hasWater = false;
+        isHeavy = false;
+        foreach (Transform child in backPack.transform)
+            child.gameObject.SetActive(false);
     }
 
 }

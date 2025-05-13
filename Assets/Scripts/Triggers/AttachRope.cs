@@ -1,11 +1,15 @@
+using TMPro;
 using UnityEngine;
 
 public class AttachRope : MonoBehaviour
 {
 
     public ItemManager ItemManager;
+    public PauseMenu PauseMenu;
+
     public GameObject completedRopeBridge;
     public GameObject originalRope;
+    public int requiredRopeID;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,15 +25,22 @@ public class AttachRope : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && ItemManager.hasRope)
+        if (other.gameObject.tag == "Player" && ItemManager.hasItem)
         {
-            Debug.Log("Köysi laitettu paikalleen");
-            if (ItemManager.hasItem == true)
+            
+            if (ItemManager.hasRope == true && requiredRopeID == ItemManager.equippedItemID)
             {
                 ItemManager.hasItem = false;
                 ItemManager.hasRope = false;
                 completedRopeBridge.SetActive(true);
                 originalRope.SetActive(false);
+                ItemManager.ropeImage.SetActive(false);
+                Debug.Log("Köysi laitettu paikalleen");
+            }
+
+            if(ItemManager.hasRope == true && requiredRopeID != ItemManager.equippedItemID)
+            {
+                PauseMenu.ShowErrorMessage("Rope cannot attach here");
             }
 
         }
