@@ -17,7 +17,7 @@ public class WaterDropTrigger : MonoBehaviour
         
     }
 
-    //Change player to not heavy 
+    //Change player to not heavy as you give water to plant 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")

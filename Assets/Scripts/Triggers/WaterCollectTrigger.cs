@@ -17,6 +17,7 @@ public class WaterCollectTrigger : MonoBehaviour
         
     }
 
+    //Collect water as you enter trigger
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
