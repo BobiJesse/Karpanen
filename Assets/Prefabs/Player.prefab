@@ -222,9 +222,9 @@ MonoBehaviour:
   jumpForce: 200
   maxJumpForce: 100
   minJumpForce: 50
-  flyForce: 1
+  flyForce: 2
   jumpCooldown: 0.5
-  airMultiplier: 1
+  airMultiplier: 0.5
   readyToJump: 1
   jumpKey: 32
   playerHeight: 1
@@ -235,6 +235,9 @@ MonoBehaviour:
   maxStamina: 100
   currentStamina: 0
   orientation: {fileID: 8096103176763458904}
+  ItemManager: {fileID: 0}
+  backPack: {fileID: 0}
+  CollectRope: {fileID: 0}
   staminaBar: {fileID: 0}
   jumpBar: {fileID: 0}
 --- !u!114 &2361615409871455921
@@ -252,3 +255,6 @@ MonoBehaviour:
   hasRope: 0
   hasWater: 0
   hasItem: 0
+  ropeImage: {fileID: 0}
+  waterImage: {fileID: 0}
+  equippedItemID: 0

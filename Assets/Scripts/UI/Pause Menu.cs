@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject verifyMenu;
     public bool gamePaused;
     public GameObject errorMessage;
+    public Image fadeStartImage;
+    public float fadeTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,6 +19,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         gamePaused = false;
         pauseMenu.SetActive(false);
+        fadeTimer = 1f;
     }
 
     // Update is called once per frame
@@ -25,6 +28,12 @@ public class PauseMenu : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape) && !gamePaused)
         {
             PauseTheGame();
+        }
+
+        if(fadeTimer >= 0)
+        {
+            fadeTimer -= Time.deltaTime * 0.7f;
+            fadeStartImage.color = new Color(0, 0, 0, fadeTimer);
         }
     }
 
@@ -62,5 +71,11 @@ public class PauseMenu : MonoBehaviour
         errorMessage.GetComponent<TextMeshProUGUI>().text = errorText;
         errorMessage.SetActive(true);
         Invoke(nameof(DeleteErrorMessage), 1.5f);
+    }
+
+    public void ReloadTheScene()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }
