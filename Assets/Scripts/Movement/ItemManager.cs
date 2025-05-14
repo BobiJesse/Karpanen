@@ -5,9 +5,11 @@ public class ItemManager : MonoBehaviour
     public bool hasRope;
     public bool hasWater;
     public bool hasItem;
+    public bool hasFertilizer;
 
     public GameObject ropeImage;
     public GameObject waterImage;
+    public GameObject fertilizerImage;
 
     public int equippedItemID;
 
