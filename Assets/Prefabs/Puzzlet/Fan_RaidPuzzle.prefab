@@ -10097,8 +10097,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e936d0af04c91b04c899d36c105f39a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raidPilvi: {fileID: 0}
-  tuuli: {fileID: 0}
+  raidPilvi: {fileID: 5835244321185397314}
+  cloudTrigger: {fileID: 2257226881839768225}
+  tuuli: {fileID: 4939447836444372680}
   ItemManager: {fileID: 0}
   PlayerMovement: {fileID: 0}
   PauseMenu: {fileID: 0}
