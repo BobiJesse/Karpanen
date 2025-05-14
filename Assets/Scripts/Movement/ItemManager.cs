@@ -5,6 +5,13 @@ public class ItemManager : MonoBehaviour
     public bool hasRope;
     public bool hasWater;
     public bool hasItem;
+    public bool hasFertilizer;
+
+    public GameObject ropeImage;
+    public GameObject waterImage;
+    public GameObject fertilizerImage;
+
+    public int equippedItemID;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,4 +24,10 @@ public class ItemManager : MonoBehaviour
     {
         
     }
+
+    public void StoreItemID(int iD)
+    {
+        equippedItemID = iD;
+    }
+
 }

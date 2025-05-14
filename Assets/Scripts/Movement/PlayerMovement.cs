@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,6 +44,11 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    public ItemManager ItemManager;
+    public GameObject backPack;
+    public CollectRope CollectRope;
+
+
     [SerializeField] public Image staminaBar;
     [SerializeField] public Image jumpBar;
 
@@ -68,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         if (grounded)
             rb.linearDamping = groundDrag;
         else
-            rb.linearDamping = 0;
+            rb.linearDamping = 1;
 
         if (!isHeavy)
         {
@@ -99,36 +105,52 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        //jump when heavy
+        //start jump timer when heavy
         if (Input.GetKey(jumpKey) && readyToJump && grounded && isHeavy && currentStamina > 30)
         {
             jumpTimer += Time.deltaTime;
             jumpBar.fillAmount = jumpTimer * 2;
         }
-            
-        if(Input.GetKeyUp(jumpKey) && readyToJump && grounded && isHeavy && currentStamina > 30)
+         
+        //Jump release
+        if(Input.GetKeyUp(jumpKey))
         {
-            readyToJump = false;
+            if (readyToJump && grounded && isHeavy && currentStamina > 30)
+            {
+                readyToJump = false;
 
-            Jump();
+                Jump();
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+                Invoke(nameof(ResetJump), jumpCooldown);
+            }
+            jumpTimer = 0;
+            jumpBar.fillAmount = 0;
         }
+        
 
+        //Gliding
         if(Input.GetKey(jumpKey) && !grounded && isHeavy && rb.linearVelocity.y < 0 && currentStamina > 0)
         {
-            rb.AddForce(transform.up * flyForce * 2, ForceMode.Force);
+            rb.AddForce(transform.up * flyForce * 1, ForceMode.Force);
             currentStamina -= Time.deltaTime * 15;
         }
 
-        if (Input.GetKey(jumpKey) && !isHeavy && currentStamina >= 0)
+        //Fly upwards
+        if (Input.GetKey(jumpKey) && !isHeavy)
         {
             rb.AddForce(transform.up * flyForce, ForceMode.Force);       
         }
 
+        //Fly downwards
         if (Input.GetKey(KeyCode.LeftShift) && !isHeavy && !grounded)
         {
             rb.AddForce(-transform.up * flyForce, ForceMode.Force);
+        }
+
+        //Drop items
+        if (Input.GetKeyDown(KeyCode.Q) && ItemManager.hasItem == true)
+        {
+            DropItem();
         }
 
     }
@@ -138,11 +160,29 @@ public class PlayerMovement : MonoBehaviour
         //calculate movement direction
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
-        //on ground
-        rb.AddForce(moveDirection.normalized * moveSpeed * 50f, ForceMode.Force);
+        //on ground when not heavy
+        if(grounded && !isHeavy)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 30f, ForceMode.Force);
+        }
 
-        //on Air
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        //on Ground when heavy
+        if (grounded && isHeavy)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 50f, ForceMode.Force);
+        }
+
+        //on Air when heavy
+        if (!grounded && isHeavy)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 30f * airMultiplier, ForceMode.Force);
+        }
+
+        //on Air when not heavy
+        if (!grounded && !isHeavy)
+        {
+            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
     }
 
     private void SpeedControl()
@@ -157,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
 
-        //Limit velocity
+        //Limit velocity in air
         if (flatVel.magnitude > airSpeed && !grounded)
         {
             Vector3 limitedVel = flatVel.normalized * airSpeed;
@@ -165,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Limit vertical velocity when flying
-        if (verticalVel.magnitude > airSpeed && !grounded && !isHeavy)
+        if (verticalVel.magnitude > airSpeed && !grounded && !isHeavy && rb.linearVelocity.y > 0)
         {
             Vector3 limitedVel = verticalVel.normalized * airSpeed;
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, limitedVel.y, rb.linearVelocity.z);
@@ -202,6 +242,30 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.useGravity = true;
+        }
+    }
+
+    private void DropItem()
+    {
+        ItemManager.hasItem = false;
+        ItemManager.hasRope = false;
+        ItemManager.hasWater = false;
+        isHeavy = false;
+        foreach (Transform child in backPack.transform)
+            child.gameObject.SetActive(false);
+        CollectRope.lineRenderer.enabled = false;
+    }
+
+    private void ChangeCameraAdjustments()
+    {
+        if(isHeavy)
+        {
+            
+        }
+
+        if(!isHeavy)
+        {
+
         }
     }
 
