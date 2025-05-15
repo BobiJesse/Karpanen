@@ -53,7 +53,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kukka
+  m_Name: Kukka 1
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -90,7 +90,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7098222526580992929, guid: 7bbbc2707e683ac4fa475903a69a2d76, type: 3}
+  m_Motion: {fileID: -6706038020108506262, guid: 726ce2c3f41ddf34897a1ee955005455, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -117,7 +117,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 6039214609494897338, guid: 7bbbc2707e683ac4fa475903a69a2d76, type: 3}
+  m_Motion: {fileID: 1448408310155712207, guid: 726ce2c3f41ddf34897a1ee955005455, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
