@@ -5,6 +5,7 @@ public class ActivateFan : MonoBehaviour
     private bool isPressed;
 
     public ParticleSystem raidPilvi;
+    public GameObject cloudTrigger;
     public ParticleSystem tuuli;
 
     public ItemManager ItemManager;
@@ -49,5 +50,6 @@ public class ActivateFan : MonoBehaviour
     private void BlowGasOut()
     {
         raidPilvi.Stop();
+        cloudTrigger.SetActive(false);
     }
 }
