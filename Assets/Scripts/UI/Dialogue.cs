@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using NUnit.Framework;
 
 public class Dialogue : MonoBehaviour
 {
@@ -9,9 +10,10 @@ public class Dialogue : MonoBehaviour
 
     public TextMeshProUGUI textComponent;
     public string[] lines;
+    public string[] currentLines;
     public float textSpeed;
 
-    private int index;
+    public int index;
     private bool isActive;
 
     // Start is called before the first frame update
@@ -44,10 +46,10 @@ public class Dialogue : MonoBehaviour
         PlayerMovement.enabled = false;
         isActive = true;
         index = 0;
-        StartCoroutine(TypeLine());
+        StartCoroutine(TypeLine(lines));
     }
 
-    IEnumerator TypeLine()
+    IEnumerator TypeLine(string[] lines)
     {
         foreach (char c in lines[index].ToCharArray())
         {
@@ -62,7 +64,7 @@ public class Dialogue : MonoBehaviour
         {
             index++;
             textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
+            StartCoroutine(TypeLine(lines));
         }
         else
         {

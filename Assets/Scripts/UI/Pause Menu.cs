@@ -8,9 +8,12 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject verifyMenu;
-    public bool gamePaused;
     public GameObject errorMessage;
     public GameObject infoMessage;
+    public GameObject controlScreen;
+    public GameObject buttons;
+
+    public bool gamePaused;
     public Image fadeStartImage;
     public float fadeTimer;
     public Dialogue Dialogue;
@@ -22,7 +25,6 @@ public class PauseMenu : MonoBehaviour
         gamePaused = false;
         pauseMenu.SetActive(false);
         fadeTimer = 1f;
-        Invoke(nameof(StartDialogue), 2);
     }
 
     // Update is called once per frame
@@ -95,8 +97,15 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(currentSceneName);
     }
 
-    public void StartDialogue()
+    public void ShowControls()
     {
-        Dialogue.gameObject.SetActive(true);
+        controlScreen.gameObject.SetActive(true);
+        buttons.gameObject.SetActive(false);
+    }
+
+    public void HideControls()
+    {
+        controlScreen.gameObject.SetActive(false);
+        buttons.gameObject.SetActive(true);
     }
 }
