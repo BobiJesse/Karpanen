@@ -39,9 +39,10 @@ public class AttachRope : MonoBehaviour
                 ItemManager.ropeImage.SetActive(false);
                 CollectRope.lineRenderer.enabled = false;
                 Debug.Log("Köysi laitettu paikalleen");
+                PauseMenu.ShowInformationMessage("Rope attached firmly");
             }
 
-            if(ItemManager.hasRope == true && requiredRopeID != ItemManager.equippedItemID)
+            if (ItemManager.hasRope == true && requiredRopeID != ItemManager.equippedItemID)
             {
                 PauseMenu.ShowErrorMessage("Rope cannot attach here");
             }

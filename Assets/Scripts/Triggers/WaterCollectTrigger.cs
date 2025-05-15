@@ -4,6 +4,7 @@ public class WaterCollectTrigger : MonoBehaviour
 {
 
     public PlayerMovement PlayerMovement;
+    public PauseMenu PauseMenu;
     public ItemManager ItemManager;
 
 
@@ -22,13 +23,20 @@ public class WaterCollectTrigger : MonoBehaviour
     //Collect water as you enter trigger
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.tag == "Player" && ItemManager.hasItem == false)
         {
             Debug.Log("water picked up");
             PlayerMovement.isHeavy = true;
             ItemManager.hasItem = true;
             ItemManager.hasWater = true;
             ItemManager.waterImage.SetActive(true);
+            PauseMenu.ShowInformationMessage("Water collected");
+        }
+
+        else if (other.gameObject.tag == "Player" && ItemManager.hasItem == true)
+        {
+            Debug.Log("hands are full");
+            PauseMenu.ShowErrorMessage("Hands are full");
         }
     }
 }

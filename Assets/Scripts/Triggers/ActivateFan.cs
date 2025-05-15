@@ -35,6 +35,7 @@ public class ActivateFan : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, transform.position.y - 0.4f, transform.position.z);
                 tuuli.Play();
                 Invoke(nameof(BlowGasOut), 4f);
+                PauseMenu.ShowInformationMessage("Fan activated");
             }
 
             else
