@@ -4,6 +4,7 @@ public class WaterDropTrigger : MonoBehaviour
 {
 
     public PlayerMovement PlayerMovement;
+    public PauseMenu PauseMenu;
     public ItemManager ItemManager;
 
 
@@ -29,7 +30,9 @@ public class WaterDropTrigger : MonoBehaviour
             ItemManager.hasItem = false;
             ItemManager.hasWater = false;
             ItemManager.waterImage.SetActive(false);
+            PauseMenu.ShowInformationMessage("Water given to the plant");
         }
+
 
         if (other.gameObject.tag == "Player" && ItemManager.hasFertilizer)
         {
@@ -38,6 +41,12 @@ public class WaterDropTrigger : MonoBehaviour
             ItemManager.hasItem = false;
             ItemManager.hasFertilizer = false;
             ItemManager.fertilizerImage.SetActive(false);
+            PauseMenu.ShowInformationMessage("Fertilizer given to the plant");
+        }
+
+        else if(other.gameObject.tag == "Player" && ItemManager.hasFertilizer == false && ItemManager.hasWater == false)
+        {
+            PauseMenu.ShowErrorMessage("Need Water/Fertilizer for Flower");
         }
     }
 }

@@ -10,8 +10,10 @@ public class PauseMenu : MonoBehaviour
     public GameObject verifyMenu;
     public bool gamePaused;
     public GameObject errorMessage;
+    public GameObject infoMessage;
     public Image fadeStartImage;
     public float fadeTimer;
+    public Dialogue Dialogue;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +22,7 @@ public class PauseMenu : MonoBehaviour
         gamePaused = false;
         pauseMenu.SetActive(false);
         fadeTimer = 1f;
+        Invoke(nameof(StartDialogue), 2);
     }
 
     // Update is called once per frame
@@ -32,7 +35,7 @@ public class PauseMenu : MonoBehaviour
 
         if(fadeTimer >= 0)
         {
-            fadeTimer -= Time.deltaTime * 0.7f;
+            fadeTimer -= Time.deltaTime * 0.5f;
             fadeStartImage.color = new Color(0, 0, 0, fadeTimer);
         }
     }
@@ -70,12 +73,30 @@ public class PauseMenu : MonoBehaviour
         Debug.Log(errorText);
         errorMessage.GetComponent<TextMeshProUGUI>().text = errorText;
         errorMessage.SetActive(true);
-        Invoke(nameof(DeleteErrorMessage), 1.5f);
+        Invoke(nameof(DeleteErrorMessage), 2f);
+    }
+
+    public void ShowInformationMessage(string infoText)
+    {
+        Debug.Log(infoText);
+        infoMessage.GetComponent<TextMeshProUGUI>().text = infoText;
+        infoMessage.SetActive(true);
+        Invoke(nameof(DeleteInformationMessage), 2f);
+    }
+
+    public void DeleteInformationMessage()
+    {
+        infoMessage.SetActive(false);
     }
 
     public void ReloadTheScene()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void StartDialogue()
+    {
+        Dialogue.gameObject.SetActive(true);
     }
 }

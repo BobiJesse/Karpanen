@@ -4,6 +4,7 @@ public class FertilizerCollect : MonoBehaviour
 {
 
     public PlayerMovement PlayerMovement;
+    public PauseMenu PauseMenu;
     public ItemManager ItemManager;
 
 
@@ -29,6 +30,13 @@ public class FertilizerCollect : MonoBehaviour
             ItemManager.hasItem = true;
             ItemManager.hasFertilizer = true;
             ItemManager.fertilizerImage.SetActive(true);
+            PauseMenu.ShowInformationMessage("Fertilizer picked up");
+        }
+
+        else if (other.gameObject.tag == "Player" && ItemManager.hasItem == true)
+        {
+            Debug.Log("hands are full");
+            PauseMenu.ShowErrorMessage("Hands are full");
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class CollectRope : MonoBehaviour
 {
@@ -29,6 +30,20 @@ public class CollectRope : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, player.transform.position);
         }
+
+        if(ItemManager.hasRope)
+        {
+            float ropeDistance = Vector3.Distance(transform.position, player.transform.position);
+
+            if(ropeDistance > 80)
+            {
+                lineRenderer.enabled = false;
+                PauseMenu.ShowErrorMessage("Line broke");
+                ItemManager.hasRope = false;
+                ItemManager.hasItem = false;
+                ItemManager.ropeImage.SetActive(false);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,7 +64,8 @@ public class CollectRope : MonoBehaviour
                 ItemManager.ropeImage.SetActive(true);
                 ItemManager.StoreItemID(ropeID);
                 lineRenderer.enabled = true;
-            }  
+                PauseMenu.ShowInformationMessage("Rope Collected");
+            }
         }
     }
 
