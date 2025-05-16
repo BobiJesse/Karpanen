@@ -4,6 +4,7 @@ public class WaterDropTrigger : MonoBehaviour
 {
 
     public PlayerMovement PlayerMovement;
+    public PauseMenu PauseMenu;
     public ItemManager ItemManager;
 
 
@@ -29,7 +30,8 @@ public class WaterDropTrigger : MonoBehaviour
             ItemManager.hasItem = false;
             ItemManager.hasWater = false;
             ItemManager.waterImage.SetActive(false);
-            gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Joy");
+            PauseMenu.ShowInformationMessage("Water given to the plant");
+            gameObject.transform.Find("Kärpänen_Kukka").GetComponent<Animator>().SetTrigger("Joy");
         }
 
         if (other.gameObject.tag == "Player" && ItemManager.hasFertilizer)
@@ -39,7 +41,8 @@ public class WaterDropTrigger : MonoBehaviour
             ItemManager.hasItem = false;
             ItemManager.hasFertilizer = false;
             ItemManager.fertilizerImage.SetActive(false);
-            gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Joy");
+            gameObject.transform.Find("Kärpänen_Kukka").GetComponent<Animator>().SetTrigger("Joy");
+            PauseMenu.ShowInformationMessage("Fertilizer given to the plant");
         }
     }
 }
