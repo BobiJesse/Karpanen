@@ -5,6 +5,7 @@ public class WaterDropTrigger : MonoBehaviour
 
     public PlayerMovement PlayerMovement;
     public ItemManager ItemManager;
+    public TalkTrigger TalkTrigger;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,6 +31,7 @@ public class WaterDropTrigger : MonoBehaviour
             ItemManager.hasWater = false;
             ItemManager.waterImage.SetActive(false);
             gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Joy");
+            TalkTrigger.npcState = NPCState.BeforeFertilizerQuest;
         }
 
         if (other.gameObject.tag == "Player" && ItemManager.hasFertilizer)
@@ -40,6 +42,7 @@ public class WaterDropTrigger : MonoBehaviour
             ItemManager.hasFertilizer = false;
             ItemManager.fertilizerImage.SetActive(false);
             gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Joy");
+            TalkTrigger.npcState = NPCState.AfterQuest;
         }
     }
 }

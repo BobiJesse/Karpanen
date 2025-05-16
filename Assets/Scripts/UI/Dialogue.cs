@@ -1,33 +1,27 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using System.Collections;
-using NUnit.Framework;
 
 public class Dialogue : MonoBehaviour
 {
     public PlayerMovement PlayerMovement;
+    public TalkTrigger TalkTrigger;
 
     public TextMeshProUGUI textComponent;
-    public string[] lines;
-    public string[] currentLines;
-    public float textSpeed;
+    public float textSpeed = 0.5f;
 
-    public int index;
-    private bool isActive;
+    private string[] lines;
+    private int index;
 
-    // Start is called before the first frame update
     void Start()
     {
-        isActive = false;
         textComponent.text = string.Empty;
-        StartDialogue();
+        gameObject.SetActive(false); // Start disabled
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && lines != null)
         {
             if (textComponent.text == lines[index])
             {
@@ -41,15 +35,23 @@ public class Dialogue : MonoBehaviour
         }
     }
 
+    // Set lines and begin dialogue
+    public void SetLines(string[] newLines)
+    {
+        lines = newLines;
+        index = 0;
+        textComponent.text = string.Empty;
+        gameObject.SetActive(true);
+        StartDialogue();
+    }
+
     public void StartDialogue()
     {
         PlayerMovement.enabled = false;
-        isActive = true;
-        index = 0;
-        StartCoroutine(TypeLine(lines));
+        StartCoroutine(TypeLine());
     }
 
-    IEnumerator TypeLine(string[] lines)
+    IEnumerator TypeLine()
     {
         foreach (char c in lines[index].ToCharArray())
         {
@@ -64,13 +66,15 @@ public class Dialogue : MonoBehaviour
         {
             index++;
             textComponent.text = string.Empty;
-            StartCoroutine(TypeLine(lines));
+            StartCoroutine(TypeLine());
         }
         else
         {
+            Debug.Log("Next Line else triggered");
             gameObject.SetActive(false);
-            isActive = false;
             PlayerMovement.enabled = true;
+            lines = null;
+            TalkTrigger.DialogueEnded();
         }
     }
 }

@@ -3449,7 +3449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1556665551111778371
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3525,10 +3525,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 0}
   textComponent: {fileID: 7041182232037148021}
-  lines:
-  - test1
-  - test2
-  lines2: []
   textSpeed: 0.5
 --- !u!1 &5666459656323516849
 GameObject:
