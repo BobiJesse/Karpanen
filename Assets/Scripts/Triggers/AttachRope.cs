@@ -6,6 +6,7 @@ public class AttachRope : MonoBehaviour
 
     public ItemManager ItemManager;
     public PauseMenu PauseMenu;
+    public ParticleSystem attachHint;
 
     public GameObject completedRopeBridge;
     public GameObject originalRope;
@@ -16,7 +17,8 @@ public class AttachRope : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        PauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
+        ItemManager = GameObject.Find("Player").GetComponent<ItemManager>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class AttachRope : MonoBehaviour
                 ItemManager.hasRope = false;
                 completedRopeBridge.SetActive(true);
                 originalRope.SetActive(false);
+                attachHint.Stop();
                 ItemManager.ropeImage.SetActive(false);
                 CollectRope.lineRenderer.enabled = false;
                 Debug.Log("Köysi laitettu paikalleen");

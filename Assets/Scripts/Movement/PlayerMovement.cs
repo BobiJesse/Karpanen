@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public ItemManager ItemManager;
     public GameObject backPack;
-    public CollectRope CollectRope;
+    public LineRenderer ropeLine;
 
 
     [SerializeField] public Image staminaBar;
@@ -54,7 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    { 
+    {
+        ropeLine = GameObject.Find("LineRenderer").GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         currentStamina = maxStamina;
@@ -253,7 +254,7 @@ public class PlayerMovement : MonoBehaviour
         isHeavy = false;
         foreach (Transform child in backPack.transform)
             child.gameObject.SetActive(false);
-        CollectRope.lineRenderer.enabled = false;
+        ropeLine.enabled = false;
     }
 
     private void ChangeCameraAdjustments()
