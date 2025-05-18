@@ -13,6 +13,7 @@ public class TalkTrigger : MonoBehaviour
 {
     public Dialogue Dialogue;
     public GameObject talktooltip;
+    public PauseMenu PauseMenu;
 
     private bool isClose;
     private bool isTalking;
@@ -23,12 +24,17 @@ public class TalkTrigger : MonoBehaviour
     public DialogueSet duringFertilizerQuestDialogue;
     public DialogueSet afterQuestDialogue;
 
+    public string firstObjective;
+    public string secondObjective;
+    public string thirdObjective;
+
     public NPCState npcState = NPCState.BeforeWaterQuest;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        PauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
+        PauseMenu.RefreshObjective(firstObjective);
     }
 
     // Update is called once per frame
@@ -38,6 +44,7 @@ public class TalkTrigger : MonoBehaviour
         {
             isTalking = true;
             Dialogue.gameObject.SetActive(true);
+            talktooltip.SetActive(false);
             Dialogue.SetLines(GetCurrentDialogue().lines);
         }
     }
@@ -89,20 +96,27 @@ public class TalkTrigger : MonoBehaviour
         {
             case NPCState.BeforeWaterQuest:
                 npcState = NPCState.DuringWaterQuest;
+                talktooltip.SetActive(true);
+                PauseMenu.RefreshObjective(secondObjective);
                 break;
 
             case NPCState.DuringWaterQuest:
+                talktooltip.SetActive(true);
                 break;
 
             case NPCState.BeforeFertilizerQuest:
                 npcState = NPCState.DuringFertilizerQuest;
+                talktooltip.SetActive(true);
+                PauseMenu.RefreshObjective(thirdObjective);
                 break;
 
             case NPCState.DuringFertilizerQuest:
+                talktooltip.SetActive(true);
                 break;
 
             case NPCState.AfterQuest:
-                //Next scene
+                PauseMenu.RefreshObjective(secondObjective);
+                PauseMenu.NextScene();
                 break;
 
             default:

@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
+
 public class Dialogue : MonoBehaviour
 {
     public PlayerMovement PlayerMovement;
@@ -10,8 +11,10 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public float textSpeed = 0.5f;
 
-    private string[] lines;
+    private DialogueLine[] lines;
     private int index;
+
+    public UnityEngine.UI.Image portraitImage;
 
     void Start()
     {
@@ -23,20 +26,20 @@ public class Dialogue : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && lines != null)
         {
-            if (textComponent.text == lines[index])
+            if (textComponent.text == lines[index].text)
             {
                 NextLine();
             }
             else
             {
                 StopAllCoroutines();
-                textComponent.text = lines[index];
+                textComponent.text = lines[index].text;
             }
         }
     }
 
     // Set lines and begin dialogue
-    public void SetLines(string[] newLines)
+    public void SetLines(DialogueLine[] newLines)
     {
         lines = newLines;
         index = 0;
@@ -53,7 +56,10 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        foreach (char c in lines[index].ToCharArray())
+        textComponent.text = string.Empty;
+        portraitImage.sprite = lines[index].portrait;
+
+        foreach (char c in lines[index].text.ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed * 0.1f);

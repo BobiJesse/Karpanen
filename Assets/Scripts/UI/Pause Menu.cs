@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject verifyMenu;
     public GameObject errorMessage;
     public GameObject infoMessage;
+    public GameObject objectiveText;
     public GameObject controlScreen;
     public GameObject buttons;
 
@@ -65,6 +66,11 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(sceneName: "Main Menu");
     }
 
+    public void NextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void DeleteErrorMessage()
     {
         errorMessage.SetActive(false);
@@ -107,5 +113,10 @@ public class PauseMenu : MonoBehaviour
     {
         controlScreen.gameObject.SetActive(false);
         buttons.gameObject.SetActive(true);
+    }
+    
+    public void RefreshObjective(string nextObjective)
+    {
+        objectiveText.GetComponent<TextMeshProUGUI>().text = nextObjective;
     }
 }
