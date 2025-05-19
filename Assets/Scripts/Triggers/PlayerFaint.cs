@@ -16,8 +16,11 @@ public class PlayerFaint : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        PlayerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        PauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
+        faintScreen = GameObject.Find("faintImage").GetComponent<Image>();
+        isFainting = false;
         faintScreen.color = new Color(0, 0, 0, 0);
-        isFainting = false;  
     }
 
     // Update is called once per frame

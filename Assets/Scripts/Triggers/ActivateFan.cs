@@ -16,6 +16,9 @@ public class ActivateFan : MonoBehaviour
     void Start()
     {
         isPressed = false;
+        ItemManager = GameObject.Find("Player").GetComponent<ItemManager>();
+        PlayerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        PauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
     }
 
     // Update is called once per frame
@@ -28,7 +31,7 @@ public class ActivateFan : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && !isPressed)
         {
-            if(ItemManager.hasWater == true && PlayerMovement.isHeavy == true)
+            if(PlayerMovement.isHeavy == true)
             {
                 isPressed = true;
                 Debug.Log("fan activated");
