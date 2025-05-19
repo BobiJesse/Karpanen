@@ -11,7 +11,8 @@ public class WaterDropTrigger : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        PlayerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        ItemManager = GameObject.Find("Player").GetComponent<ItemManager>();
     }
 
     // Update is called once per frame

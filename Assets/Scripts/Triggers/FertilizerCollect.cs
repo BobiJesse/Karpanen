@@ -11,7 +11,9 @@ public class FertilizerCollect : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        PlayerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        ItemManager = GameObject.Find("Player").GetComponent<ItemManager>();
+        PauseMenu = GameObject.Find("Canvas").GetComponent<PauseMenu>();
     }
 
     // Update is called once per frame
