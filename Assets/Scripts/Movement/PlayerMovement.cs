@@ -64,8 +64,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, whatIsGround);
-        //grounded = Physics.BoxCast(transform.position, transform.localScale * 0.5f, Vector3.down, transform.rotation, whatIsGround);
+        //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, whatIsGround);
+        grounded = Physics.BoxCast(transform.position, new Vector3(0.5f, 0.05f, 0.5f), Vector3.down, Quaternion.identity, 0.5f, whatIsGround);
 
         MyInput();
 
@@ -112,9 +112,9 @@ public class PlayerMovement : MonoBehaviour
             jumpTimer += Time.deltaTime;
             jumpBar.fillAmount = jumpTimer * 2;
         }
-         
+
         //Jump release
-        if(Input.GetKeyUp(jumpKey))
+        if (Input.GetKeyUp(jumpKey))
         {
             if (readyToJump && grounded && isHeavy && currentStamina > 30)
             {
@@ -189,6 +189,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(transform.up * flyForce, ForceMode.Force);
         }
+
+        
     }
 
     private void SpeedControl()
@@ -229,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         rb.AddForce(transform.up * force, ForceMode.Impulse);
-        currentStamina -= force / 3;
+        currentStamina -= force / 2;
         jumpTimer = 0f;
         jumpBar.fillAmount = 0f;
     }

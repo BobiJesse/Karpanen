@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject objectiveText;
     public GameObject controlScreen;
     public GameObject buttons;
+    public GameObject narrativeImage;
 
     public bool gamePaused;
     public Image fadeStartImage;
@@ -82,7 +83,15 @@ public class PauseMenu : MonoBehaviour
     public void ChangeSceneFade()
     {
         isFading = false;
-        Invoke(nameof(NextScene), 1f);
+        Invoke(nameof(ShowNarrative), 1.2f);
+    }
+
+    public void ShowNarrative()
+    {
+        narrativeImage.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void DeleteErrorMessage()
