@@ -34,8 +34,8 @@ ModelImporter:
       name: Armature.001|FanSpin
       takeName: Armature.001|FanSpin
       internalID: 2345053505109763553
-      firstFrame: 12
-      lastFrame: 20
+      firstFrame: 0
+      lastFrame: 12
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
