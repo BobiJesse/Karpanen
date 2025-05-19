@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8356136179277139300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3097,7 +3097,7 @@ GameObject:
   - component: {fileID: 111443630385763419}
   - component: {fileID: 2006400757965380759}
   m_Layer: 5
-  m_Name: Fly Downwards (1)
+  m_Name: Drop Item (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3150,7 +3150,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Left Shift (without heavy items)
+  m_text: Q
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3449,7 +3449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6733888459049923317
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4580,7 +4580,7 @@ GameObject:
   - component: {fileID: 2729662974312174075}
   - component: {fileID: 6132406547472783088}
   m_Layer: 5
-  m_Name: Fly Downwards
+  m_Name: Drop Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4633,7 +4633,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fly Downwards
+  m_text: Drop Item
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4972,6 +4972,7 @@ MonoBehaviour:
   buttons: {fileID: 3404475937622694110}
   gamePaused: 0
   fadeStartImage: {fileID: 1479221655091389764}
+  isFading: 0
   fadeTimer: 0
   Dialogue: {fileID: 7909824871183414098}
 --- !u!1 &7992055208969285640

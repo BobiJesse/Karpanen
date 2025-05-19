@@ -16,12 +16,14 @@ public class PauseMenu : MonoBehaviour
 
     public bool gamePaused;
     public Image fadeStartImage;
+    public bool isFading;
     public float fadeTimer;
     public Dialogue Dialogue;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isFading = true;
         Time.timeScale = 1f;
         gamePaused = false;
         pauseMenu.SetActive(false);
@@ -36,9 +38,15 @@ public class PauseMenu : MonoBehaviour
             PauseTheGame();
         }
 
-        if(fadeTimer >= 0)
+        if(fadeTimer >= 0 && isFading)
         {
             fadeTimer -= Time.deltaTime * 0.5f;
+            fadeStartImage.color = new Color(0, 0, 0, fadeTimer);
+        }
+
+        else if (fadeTimer <= 1 && !isFading)
+        {
+            fadeTimer += Time.deltaTime;
             fadeStartImage.color = new Color(0, 0, 0, fadeTimer);
         }
     }
@@ -69,6 +77,12 @@ public class PauseMenu : MonoBehaviour
     public void NextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void ChangeSceneFade()
+    {
+        isFading = false;
+        Invoke(nameof(NextScene), 1f);
     }
 
     public void DeleteErrorMessage()

@@ -116,7 +116,7 @@ public class TalkTrigger : MonoBehaviour
 
             case NPCState.AfterQuest:
                 PauseMenu.RefreshObjective(secondObjective);
-                PauseMenu.NextScene();
+                PauseMenu.ChangeSceneFade();
                 break;
 
             default:

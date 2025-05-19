@@ -1,5 +1,4 @@
 using Unity.Cinemachine;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.1f, whatIsGround);
+        //grounded = Physics.BoxCast(transform.position, transform.localScale * 0.5f, Vector3.down, transform.rotation, whatIsGround);
 
         MyInput();
 
@@ -129,24 +129,23 @@ public class PlayerMovement : MonoBehaviour
         }
         
 
+        /*
         //Gliding
         if(Input.GetKey(jumpKey) && !grounded && isHeavy && rb.linearVelocity.y < 0 && currentStamina > 0)
         {
             rb.AddForce(transform.up * flyForce * 1, ForceMode.Force);
             currentStamina -= Time.deltaTime * 15;
         }
+        */
+        
 
-        //Fly upwards
-        if (Input.GetKey(jumpKey) && !isHeavy)
-        {
-            rb.AddForce(transform.up * flyForce, ForceMode.Force);       
-        }
-
+        /*
         //Fly downwards
         if (Input.GetKey(KeyCode.LeftShift) && !isHeavy && !grounded)
         {
             rb.AddForce(-transform.up * flyForce, ForceMode.Force);
         }
+        */
 
         //Drop items
         if (Input.GetKeyDown(KeyCode.Q) && ItemManager.hasItem == true)
@@ -183,6 +182,12 @@ public class PlayerMovement : MonoBehaviour
         if (!grounded && !isHeavy)
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+
+        //Fly upwards
+        if (Input.GetKey(jumpKey) && !isHeavy)
+        {
+            rb.AddForce(transform.up * flyForce, ForceMode.Force);
         }
     }
 
