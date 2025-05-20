@@ -21,10 +21,12 @@ public class PauseMenu : MonoBehaviour
     public float fadeTimer;
     public Dialogue Dialogue;
     public ShowHelp ShowHelp;
+    private bool narrativeScreenOn;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        narrativeScreenOn = false;
         isFading = true;
         Time.timeScale = 1f;
         gamePaused = false;
@@ -36,7 +38,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !gamePaused && ShowHelp.isActive == false)
+        if(Input.GetKeyDown(KeyCode.Escape) && !gamePaused && ShowHelp.isActive == false && !narrativeScreenOn)
         {
             PauseTheGame();
         }
@@ -90,8 +92,9 @@ public class PauseMenu : MonoBehaviour
 
     public void ShowNarrative()
     {
+        narrativeScreenOn = true;
         narrativeImage.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
