@@ -35,7 +35,7 @@ public class WaterDropTrigger : MonoBehaviour
             TalkTrigger.npcState = NPCState.BeforeFertilizerQuest;
         }
 
-        if (other.gameObject.tag == "Player" && ItemManager.hasFertilizer)
+        if (other.gameObject.tag == "Player" && ItemManager.hasFertilizer && TalkTrigger.npcState == NPCState.DuringFertilizerQuest)
         {
             Debug.Log("fertilizer given to plant");
             PlayerMovement.isHeavy = false;
