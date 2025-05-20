@@ -3,7 +3,7 @@ using UnityEngine;
 public class ShowHelp : MonoBehaviour
 {
     public GameObject helpScreen;
-    private bool isActive;
+    public bool isActive;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

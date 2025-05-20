@@ -20,6 +20,7 @@ public class PauseMenu : MonoBehaviour
     public bool isFading;
     public float fadeTimer;
     public Dialogue Dialogue;
+    public ShowHelp ShowHelp;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,12 +30,13 @@ public class PauseMenu : MonoBehaviour
         gamePaused = false;
         pauseMenu.SetActive(false);
         fadeTimer = 1f;
+        ShowHelp = GameObject.Find("InfoTrigger").GetComponent<ShowHelp>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !gamePaused)
+        if(Input.GetKeyDown(KeyCode.Escape) && !gamePaused && ShowHelp.isActive == false)
         {
             PauseTheGame();
         }
