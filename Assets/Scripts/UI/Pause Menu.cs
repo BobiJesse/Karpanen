@@ -13,32 +13,43 @@ public class PauseMenu : MonoBehaviour
     public GameObject objectiveText;
     public GameObject controlScreen;
     public GameObject buttons;
+    public GameObject narrativeImage;
 
     public bool gamePaused;
     public Image fadeStartImage;
+    public bool isFading;
     public float fadeTimer;
     public Dialogue Dialogue;
+    public ShowHelp ShowHelp;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isFading = true;
         Time.timeScale = 1f;
         gamePaused = false;
         pauseMenu.SetActive(false);
         fadeTimer = 1f;
+        ShowHelp = GameObject.Find("InfoTrigger").GetComponent<ShowHelp>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !gamePaused)
+        if(Input.GetKeyDown(KeyCode.Escape) && !gamePaused && ShowHelp.isActive == false)
         {
             PauseTheGame();
         }
 
-        if(fadeTimer >= 0)
+        if(fadeTimer >= 0 && isFading)
         {
             fadeTimer -= Time.deltaTime * 0.5f;
+            fadeStartImage.color = new Color(0, 0, 0, fadeTimer);
+        }
+
+        else if (fadeTimer <= 1 && !isFading)
+        {
+            fadeTimer += Time.deltaTime;
             fadeStartImage.color = new Color(0, 0, 0, fadeTimer);
         }
     }
@@ -69,6 +80,20 @@ public class PauseMenu : MonoBehaviour
     public void NextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void ChangeSceneFade()
+    {
+        isFading = false;
+        Invoke(nameof(ShowNarrative), 1.2f);
+    }
+
+    public void ShowNarrative()
+    {
+        narrativeImage.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void DeleteErrorMessage()

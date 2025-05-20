@@ -222,9 +222,9 @@ MonoBehaviour:
   groundDrag: 6
   jumpTimer: 0
   jumpForce: 200
-  maxJumpForce: 100
+  maxJumpForce: 80
   minJumpForce: 50
-  flyForce: 10
+  flyForce: 50
   jumpCooldown: 0.5
   airMultiplier: 0.5
   readyToJump: 1
