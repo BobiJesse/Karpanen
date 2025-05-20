@@ -18,6 +18,7 @@ public class Dialogue : MonoBehaviour
 
     void Start()
     {
+        PlayerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         TalkTrigger = GameObject.Find("TalkTrigger").GetComponent<TalkTrigger>();
         textComponent.text = string.Empty;
         gameObject.SetActive(false); // Start disabled
