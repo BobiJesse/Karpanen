@@ -29515,7 +29515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1423448511}
   SFXSource: {fileID: 1218553130}
-  background: {fileID: 8300000, guid: 460907ba9b41105428ac1dd2cc95f6bf, type: 3}
+  background: {fileID: 8300000, guid: a1512ed4272c5654091c121b84be3c74, type: 3}
   jump: {fileID: 0}
   collect: {fileID: 0}
   walk: {fileID: 0}
